@@ -12,6 +12,7 @@ import { AlertComponent } from './alert/alert.component';
 import { BraceletComponent } from './bracelet/bracelet.component';
 import { ActiviteComponent } from './activite/activite.component';
 import { RapportComponent } from './rapport/rapport.component';
+import { HeadComponent } from './head/head.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RapportComponent } from './rapport/rapport.component';
     AlertComponent,
     BraceletComponent,
     ActiviteComponent,
-    RapportComponent
+    RapportComponent,
+    HeadComponent
   ],
   imports: [
     BrowserModule
