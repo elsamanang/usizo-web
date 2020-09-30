@@ -20,6 +20,11 @@ import { AddEnfantComponent } from './add-enfant/add-enfant.component';
 import { AddActiviteComponent } from './add-activite/add-activite.component';
 import { AddBraceletComponent } from './add-bracelet/add-bracelet.component';
 import { AddRapportComponent } from './add-rapport/add-rapport.component';
+import { EditRapportComponent } from './edit-rapport/edit-rapport.component';
+import { EditBraceletComponent } from './edit-bracelet/edit-bracelet.component';
+import { EditActiviteComponent } from './edit-activite/edit-activite.component';
+import { EditEnfantComponent } from './edit-enfant/edit-enfant.component';
+import { EditEncadreurComponent } from './edit-encadreur/edit-encadreur.component';
 
 const routes: Routes = [
   {
@@ -37,6 +42,10 @@ const routes: Routes = [
   {
     path: 'encadreurs',
     component: EncadreurComponent
+  },
+  {
+    path: 'new-encadreur',
+    component: AddEncadreurComponent
   }
 ];
 
@@ -60,6 +69,11 @@ const routes: Routes = [
     AddActiviteComponent,
     AddBraceletComponent,
     AddRapportComponent,
+    EditRapportComponent,
+    EditBraceletComponent,
+    EditActiviteComponent,
+    EditEnfantComponent,
+    EditEncadreurComponent,
   ],
   imports: [
     BrowserModule,
