@@ -15,6 +15,11 @@ import { ActiviteComponent } from './activite/activite.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { LoginComponent } from './login/login.component';
 import { HeadComponent } from './head/head.component';
+import { AddEncadreurComponent } from './add-encadreur/add-encadreur.component';
+import { AddEnfantComponent } from './add-enfant/add-enfant.component';
+import { AddActiviteComponent } from './add-activite/add-activite.component';
+import { AddBraceletComponent } from './add-bracelet/add-bracelet.component';
+import { AddRapportComponent } from './add-rapport/add-rapport.component';
 
 const routes: Routes = [
   {
@@ -50,6 +55,11 @@ const routes: Routes = [
     RapportComponent,
     LoginComponent,
     HeadComponent,
+    AddEncadreurComponent,
+    AddEnfantComponent,
+    AddActiviteComponent,
+    AddBraceletComponent,
+    AddRapportComponent,
   ],
   imports: [
     BrowserModule,
