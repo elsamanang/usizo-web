@@ -44,8 +44,24 @@ const routes: Routes = [
     component: EncadreurComponent
   },
   {
+    path: 'enfants',
+    component: EnfantComponent
+  },
+  {
     path: 'new-encadreur',
     component: AddEncadreurComponent
+  },
+  {
+    path: 'new-enfant',
+    component: AddEnfantComponent
+  },
+  {
+    path: 'edit-encadreur',
+    component: EditEncadreurComponent
+  },
+  {
+    path: 'edit-enfant',
+    component: EditEnfantComponent
   }
 ];
 
