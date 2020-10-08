@@ -48,6 +48,10 @@ const routes: Routes = [
     component: EnfantComponent
   },
   {
+    path: 'activites',
+    component: ActiviteComponent
+  },
+  {
     path: 'new-encadreur',
     component: AddEncadreurComponent
   },
@@ -56,12 +60,20 @@ const routes: Routes = [
     component: AddEnfantComponent
   },
   {
+    path: 'new-activite',
+    component: AddActiviteComponent
+  },
+  {
     path: 'edit-encadreur',
     component: EditEncadreurComponent
   },
   {
     path: 'edit-enfant',
     component: EditEnfantComponent
+  },
+  {
+    path: 'edit-activite',
+    component: EditActiviteComponent
   }
 ];
 
