@@ -1,1 +1,71 @@
-<p>rapport works!</p>
+<style>
+    .in {
+        margin-left: 10%;
+    }
+    .line {
+        display: inline-block;
+        word-spacing: 50%;
+    }
+    #ajout{
+        margin-left: 80%;
+    }
+</style>
+<script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../../assets/js/demo/datatables-demo.js"></script>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+       <app-header></app-header>
+       <div id="content-wrapper" class="d-flex flex-column">
+   
+           <!-- Main Content -->
+           <div id="content">
+               <app-head></app-head>
+               <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800 line">Rapports</h1>
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Activite</th>
+                        <th>Fichier</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Date</th>
+                        <th>Activite</th>
+                        <th>Fichier</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr>
+                        <td>10/02/2020</td>
+                        <td>Lavage des mains</td>
+                        <td>jean.pdf</td>
+                        <td>
+                            <a routerLink="/edit-enfant" class="btn btn-primary btn-circle in">
+                                <i class="fas fa-file-export"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-circle in">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!-- /.container-fluid -->
