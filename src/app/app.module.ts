@@ -55,7 +55,8 @@ const routes: Routes = [
     component: RapportComponent
   },
   {
-    path: ''
+    path: 'bracelets',
+    component: BraceletComponent
   },
   {
     path: 'new-encadreur',
