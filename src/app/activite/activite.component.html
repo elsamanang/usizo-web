@@ -1,1 +1,92 @@
-<p>activite works!</p>
+<style>
+    .in {
+        margin-left: 10%;
+    }
+    .line {
+        display: inline-block;
+        word-spacing: 50%;
+    }
+    #ajout{
+        margin-left: 80%;
+    }
+</style>
+<script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../../assets/js/demo/datatables-demo.js"></script>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+       <app-header></app-header>
+       <div id="content-wrapper" class="d-flex flex-column">
+   
+           <!-- Main Content -->
+           <div id="content">
+               <app-head></app-head>
+               <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800 line">Activites</h1>
+            <a routerLink="/new-activite" id="ajout" class="d-none mb-2 d-sm-inline-block btn btn-sm btn-primary shadow-sm line"><i class="fas fa-plus text-white-50"></i> ajouter activite</a>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Date</th>
+                        <th>Lieu</th>
+                        <th>Encadreur</th>
+                        <th>Enfants</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Date</th>
+                        <th>Lieu</th>
+                        <th>Encadreur</th>
+                        <th>Enfants</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr>
+                        <td>Tiger</td>
+                        <td>2011/04/25</td>
+                        <td>34 av de la paix</td>
+                        <td>anne-marie tiger</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-circle in" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                <i class="fas fa-tasks"></i>
+                            </a>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <table>
+                                        <tr>elsa</tr>
+                                        <tr>elsa</tr>
+                                        <tr>elsa</tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a routerLink="/edit-activite" class="btn btn-primary btn-circle in">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-circle in">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!-- /.container-fluid -->
