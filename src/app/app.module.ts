@@ -71,6 +71,10 @@ const routes: Routes = [
     component: AddActiviteComponent
   },
   {
+    path: 'new-bracelet',
+    component: AddBraceletComponent
+  },
+  {
     path: 'edit-encadreur',
     component: EditEncadreurComponent
   },
