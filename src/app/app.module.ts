@@ -85,6 +85,10 @@ const routes: Routes = [
   {
     path: 'edit-activite',
     component: EditActiviteComponent
+  },
+  {
+    path: 'edit-bracelet',
+    component: EditBraceletComponent
   }
 ];
 
