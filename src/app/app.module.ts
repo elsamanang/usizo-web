@@ -52,6 +52,10 @@ const routes: Routes = [
     component: ActiviteComponent
   },
   {
+    path: 'rapports',
+    component: RapportComponent
+  },
+  {
     path: 'new-encadreur',
     component: AddEncadreurComponent
   },
