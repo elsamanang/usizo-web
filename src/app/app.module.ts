@@ -59,6 +59,10 @@ const routes: Routes = [
     component: BraceletComponent
   },
   {
+    path: 'alertes',
+    component: AlertComponent
+  },
+  {
     path: 'new-encadreur',
     component: AddEncadreurComponent
   },
