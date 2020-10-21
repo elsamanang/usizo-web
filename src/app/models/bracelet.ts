@@ -1,0 +1,7 @@
+export class Bracelet {
+
+    uid: string;
+    bluetooth: string;
+    wifi: string;
+    gps: string;
+}
