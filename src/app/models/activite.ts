@@ -1,4 +1,3 @@
-import { Encadreur } from './encadreur';
 import { Enfant } from './enfant';
 
 export class Activite {
@@ -7,7 +6,7 @@ export class Activite {
     nom: string;
     date: Date;
     lieu: string;
-    encadreur: Encadreur;
+    encadreur: string;
     enfants: Enfant[];
 
 }

@@ -8,4 +8,6 @@ export class Encadreur {
     naissance: Date;
     adresse: string;
     photo: string;
+    mdp: string;
+    role: number;
 }
