@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  encadreurs: number;
+  bracelets: number;
+  enfants: number;
+  alerts: number
+
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
+    this.bracelets = 1;
   }
 
 }

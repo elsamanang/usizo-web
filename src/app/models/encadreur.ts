@@ -5,7 +5,7 @@ export class Encadreur {
     prenom: string;
     mail: string;
     phone: string;
-    naissance: Date;
+    naissance: string;
     adresse: string;
     photo: string;
     mdp: string;
