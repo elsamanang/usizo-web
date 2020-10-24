@@ -48,8 +48,8 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>bracelet1B</td>
+                      <tr *ngFor="let bracelet of bracelets | async">
+                        <td>{{bracelet.bluetooth}}</td>
                         <td>bracelet1W</td>
                         <td>
                             <a routerLink="/edit-bracelet" class="btn btn-primary btn-circle in">
