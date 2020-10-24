@@ -56,8 +56,8 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>Tiger</td>
+                      <tr *ngFor="let enfant of enfants | async">
+                        <td>{{enfant.nom}}</td>
                         <td>Nixon</td>
                         <td>jean</td>
                         <td>2011/04/25</td>
