@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Activite } from '../models/activite';
+import { CrudService } from '../services/crud.service';
 
 @Component({
   selector: 'app-activite',
@@ -7,9 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActiviteComponent implements OnInit {
 
-  constructor() { }
+  ref: AngularFirestoreCollection<Activite>;
+  activites: Observable<Activite[]>;
+
+  constructor(private serviceCrud: CrudService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.activites = this.serviceCrud.colId$('activite');
   }
 
 }
