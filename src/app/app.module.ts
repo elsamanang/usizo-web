@@ -24,6 +24,13 @@ import { EditBraceletComponent } from './edit-bracelet/edit-bracelet.component';
 import { EditActiviteComponent } from './edit-activite/edit-activite.component';
 import { EditEnfantComponent } from './edit-enfant/edit-enfant.component';
 import { EditEncadreurComponent } from './edit-encadreur/edit-encadreur.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule} from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthentificationService } from './services/authentification.service';
 
 const routes: Routes = [
   {
@@ -123,9 +130,15 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule, 
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AuthentificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
