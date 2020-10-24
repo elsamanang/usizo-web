@@ -54,12 +54,12 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>Tiger</td>
-                        <td>Nixon</td>
-                        <td>eee@gmail.com</td>
-                        <td>0990000000</td>
-                        <td>2011/04/25</td>
+                      <tr *ngFor="let encadreur of encadreurs | async">
+                        <td>{{encadreur.nom}}</td>
+                        <td>{{encadreur.prenom}}</td>
+                        <td>{{encadreur.mail}}</td>
+                        <td>{{encadreur.phone}}</td>
+                        <td>{{encadreur.naissance}}</td>
                         <td>
                             <a routerLink="/edit-encadreur" class="btn btn-primary btn-circle in">
                                 <i class="fas fa-edit"></i>
