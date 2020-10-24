@@ -54,8 +54,8 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>Tiger</td>
+                      <tr *ngFor="let activite of activites | async">
+                        <td>{{activite.nom}}</td>
                         <td>2011/04/25</td>
                         <td>34 av de la paix</td>
                         <td>anne-marie tiger</td>
