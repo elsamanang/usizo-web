@@ -48,8 +48,8 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>10/02/2020</td>
+                      <tr *ngFor="let rapport of rapports | async">
+                        <td>{{rapport.date}}</td>
                         <td>Lavage des mains</td>
                         <td>jean.pdf</td>
                         <td>
