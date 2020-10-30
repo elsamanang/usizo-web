@@ -37,6 +37,7 @@
                       <tr>
                         <th>Bluetooth</th>
                         <th>Wifi</th>
+                        <th>Phone</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -44,13 +45,15 @@
                       <tr>
                         <th>Bluetooth</th>
                         <th>Wifi</th>
+                        <th>Phone</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
                       <tr *ngFor="let bracelet of bracelets | async">
                         <td>{{bracelet.bluetooth}}</td>
-                        <td>bracelet1W</td>
+                        <td>{{bracelet.wifi}}</td>
+                        <td>{{bracelet.phone}}</td>
                         <td>
                             <a routerLink="/edit-bracelet" class="btn btn-primary btn-circle in">
                                 <i class="fas fa-edit"></i>

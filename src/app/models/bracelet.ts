@@ -4,4 +4,5 @@ export class Bracelet {
     bluetooth: string;
     wifi: string;
     gps: string;
+    phone: string;
 }
