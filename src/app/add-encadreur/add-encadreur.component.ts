@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { finalize} from 'rxjs/operators';
 import { Encadreur } from '../models/encadreur';
 import uid from 'uid';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-add-encadreur',
@@ -23,7 +24,8 @@ export class AddEncadreurComponent implements OnInit {
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
     private afs: AngularFirestore,
-    private storage : AngularFireStorage) { }
+    private storage : AngularFireStorage,
+    private serviceauth: AuthentificationService) { }
 
   ngOnInit() {
     this.initForm();
@@ -66,7 +68,15 @@ export class AddEncadreurComponent implements OnInit {
       role: role
 
     }
-    this.afs.doc('encadreur/'+data.uid).set(data);
+    this.afs.doc('encadreur/'+data.uid).set(data).then((result) => {
+      this.serviceauth.SignUp(data.mail, data.mdp).then((result) => {
+        this.router.navigate(['/encadreurs']);
+      }).catch((error) => {
+        window.alert("echec de creation du compte");
+      });
+    }).catch((error) => {
+      window.alert("echec d'ajout");
+    });
   }
 
   uploadFile(event) {
@@ -80,7 +90,6 @@ export class AddEncadreurComponent implements OnInit {
     task.snapshotChanges().subscribe(fileStock => {
       fileRef.getDownloadURL().subscribe(storageFile => {
         this.refImage = storageFile.toString();
-        console.log(this.refImage)
       })
     })
   }
