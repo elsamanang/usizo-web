@@ -80,9 +80,9 @@
                        </tr>
                      </tfoot>
                      <tbody>
-                       <tr>
-                         <td>bracelet1</td>
-                         <td>Lavage des mains</td>
+                       <tr *ngFor="let alert of alerts | async">
+                         <td>{{alert.bluetooth}}</td>
+                         <td>{{alert.wifi}}</td>
                        </tr>
                      </tbody>
                    </table>
