@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Activite } from '../models/activite';
@@ -16,10 +16,14 @@ export class ActiviteComponent implements OnInit {
   activites: Observable<Activite[]>;
 
   constructor(private serviceCrud: CrudService,
-    private router: Router) { }
+    private router: Router,
+    private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.activites = this.serviceCrud.colId$('activite');
+  }
+  delete(uid){
+    this.afs.doc('activite/'+uid).delete();
   }
 
 }
