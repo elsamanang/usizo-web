@@ -56,9 +56,9 @@
                     <tbody>
                       <tr *ngFor="let activite of activites | async">
                         <td>{{activite.nom}}</td>
-                        <td>2011/04/25</td>
-                        <td>34 av de la paix</td>
-                        <td>anne-marie tiger</td>
+                        <td>{{activite.date}}</td>
+                        <td>{{activite.lieu}}</td>
+                        <td>{{activite.encadreur.nom}}</td>
                         <td>
                             <a href="#" class="btn btn-primary btn-circle in" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                 <i class="fas fa-tasks"></i>
@@ -66,9 +66,7 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <table>
-                                        <tr>elsa</tr>
-                                        <tr>elsa</tr>
-                                        <tr>elsa</tr>
+                                        <tr *ngFor="let enfant of activite.enfants">{{enfant.nom - enfant.prenom}}</tr>
                                     </table>
                                 </div>
                             </div>
@@ -77,7 +75,7 @@
                             <a routerLink="/edit-activite" class="btn btn-primary btn-circle in">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-danger btn-circle in">
+                            <a (click)="delete(activite.uid)" class="btn btn-danger btn-circle in">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>
