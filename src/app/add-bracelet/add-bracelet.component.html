@@ -22,16 +22,19 @@
                           <div class="text-center">
                             <h1 class="h5 text-gray-900 mb-4">remplir le formulaire !</h1>
                           </div>
-                          <form class="user">
+                          <form class="user" [formGroup]="braceletForm">
                             <div class="form-group row">
                               <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Bluetooth">
+                                <input type="text" formControlName="bluetooth" class="form-control form-control-user" id="exampleFirstName" placeholder="Bluetooth">
                               </div>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Wifi">
+                                <input type="text" formControlName="wifi" class="form-control form-control-user" id="exampleLastName" placeholder="Wifi">
+                              </div>
+                              <div class="col-sm-6">
+                                <input type="text" formControlName="phone" class="form-control form-control-user" id="exampleLastName" placeholder="Wifi">
                               </div>
                             </div>
-                            <a href="" class="btn btn-primary btn-user btn-block">
+                            <a (click)="onSubmit()" class="btn btn-primary btn-user btn-block">
                               Ajouter
                             </a>
                           </form>
