@@ -85,19 +85,19 @@ const routes: Routes = [
     component: AddBraceletComponent
   },
   {
-    path: 'edit-encadreur',
+    path: 'encadreur/:id',
     component: EditEncadreurComponent
   },
   {
-    path: 'edit-enfant',
+    path: 'enfant/:id',
     component: EditEnfantComponent
   },
   {
-    path: 'edit-activite',
+    path: 'activite/:id',
     component: EditActiviteComponent
   },
   {
-    path: 'edit-bracelet',
+    path: 'bracelet/:id',
     component: EditBraceletComponent
   }
 ];
