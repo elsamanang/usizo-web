@@ -9,6 +9,9 @@
     #ajout{
         margin-left: 80%;
     }
+    i {
+      color: aliceblue;
+    }
 </style>
 <script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -55,12 +58,12 @@
                         <td>{{bracelet.wifi}}</td>
                         <td>{{bracelet.phone}}</td>
                         <td>
-                            <a routerLink="/edit-bracelet" class="btn btn-primary btn-circle in">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-circle in">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                          <a (click)="details(bracelet.uid)" class="btn btn-primary btn-circle in">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                          <a (click)="delete(bracelet.uid)" class="btn btn-danger btn-circle in">
+                              <i class="fas fa-trash"></i>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
