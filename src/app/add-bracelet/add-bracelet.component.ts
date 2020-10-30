@@ -43,7 +43,11 @@ export class AddBraceletComponent implements OnInit {
       gps: '',
       phone: phone
     }
-    this.afs.doc('bracelet/'+data.uid).set(data);
+    this.afs.doc('bracelet/'+data.uid).set(data).then((result) => {
+      this.router.navigate(['/bracelets']);
+    }).catch((error) => {
+      window.alert("echec d'ajout");
+    })
   }
 
 }
