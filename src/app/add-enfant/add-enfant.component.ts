@@ -70,7 +70,11 @@ export class AddEnfantComponent implements OnInit {
 
     this.serviceCrud.doc$<Bracelet>("bracelet/"+bracelet).subscribe(enc =>{
       data.bracelet = enc;
-      this.afs.doc('enfant/'+data.uid).set(data);
+      this.afs.doc('enfant/'+data.uid).set(data).then((result) => {
+        this.router.navigate(['/enfants']);
+      }).catch((error) => {
+        window.alert("echec d'ajout");
+      });;
     });
   }
 
@@ -85,7 +89,6 @@ export class AddEnfantComponent implements OnInit {
     task.snapshotChanges().subscribe(fileStock => {
       fileRef.getDownloadURL().subscribe(storageFile => {
         this.refImage = storageFile.toString();
-        console.log(this.refImage)
       })
     })
   }

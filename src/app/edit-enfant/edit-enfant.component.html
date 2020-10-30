@@ -11,7 +11,7 @@
             <div class="container-fluid">
 
               <!-- Page Heading -->
-              <h1 class="h3 mb-2 text-gray-800 line">Enfant zxhei9jrjdkju4</h1>
+              <h1 class="h3 mb-2 text-gray-800 line">Enfant {{uid}}</h1>
               <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                   <!-- Nested Row within Card Body -->
@@ -19,34 +19,38 @@
                     <div class="col-lg-6 d-none d-lg-block">
                         <div class="card shadow p-5">
                             <div class="card-header py-3">
-                              <img src="../../assets/img/encadrement.jpg" width="300px" height="200px">
+                              <img src="{{(enfant | async)?.photo}}" width="300px" height="200px">
                             </div>
                             <div class="card-body">
                                 <ul>
                                     <li>
                                         <b>Nom :</b>
-                                        Elsa
+                                        {{(enfant | async)?.nom}}
                                     </li>
                                     <li>
                                         <b>Postnom :</b>
-                                        Manang
+                                        {{(enfant | async)?.postnom}}
                                     </li>
                                     <li>
                                         <b>Prenom :</b>
-                                        kaf
+                                        {{(enfant | async)?.prenom}}
                                     </li>
                                     <li>
                                         <b>Naissance :</b>
-                                        01/01/1900
+                                        {{(enfant | async)?.naissance}}
                                     </li>
                                     <li>
                                         <b>Pere :</b>
-                                        Pascal Roche
+                                        {{(enfant | async)?.pere}}
                                     </li>
                                     <li>
                                         <b>Mere :</b>
-                                        Marie Curie
+                                        {{(enfant | async)?.mere}}
                                     </li>
+                                    <li>
+                                      <b>bracelet phone :</b>
+                                      {{(enfant | async)?.bracelet.phone}}
+                                  </li>
                                 </ul>
                             </div>
                           </div>
@@ -56,35 +60,43 @@
                             <div class="text-center">
                               <h1 class="h5 text-gray-900 mb-4">formulaire de modification !</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" [formGroup]="enfantForm">
                               <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                  <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                                  <input type="text" formControlName="nom" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
                                 </div>
                                 <div class="col-sm-6">
-                                  <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                                  <input type="text" formControlName="postnom" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Other Name">
+                                    <input type="text" formControlName="prenom" class="form-control form-control-user" id="exampleInputEmail" placeholder="Other Name">
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="date" class="form-control form-control-user" placeholder="01/01/1900">
+                                    <input type="date" formControlName="naissance" class="form-control form-control-user" placeholder="01/01/1900">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                  <input type="text" class="form-control form-control-user" id="exampleInputPassword" placeholder="Father Name">
+                                  <input type="text" formControlName="pere" class="form-control form-control-user" id="exampleInputPassword" placeholder="Father Name">
                                 </div>
                                 <div class="col-sm-6">
-                                  <input type="text" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Mother Name">
+                                  <input type="text" formControlName="mere" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Mother Name">
                                 </div>
                               </div>
-                              <div class="form-group">
-                                <input type="file" class="form-control form-control-user">
+                              <div class="form-group row">
+                                <div class="col-sm-6">
+                                  <input type="file" (change)="uploadFile($event)" class="form-control form-control-user">
+                                  <img [src]="downloadURL | async" height="100px" width="100px" class="mb-2" style="align-items: center;" alt=""/>
+                                </div>
+                                <div class="col-sm-6">
+                                  <select class="form-control form-control-user" formControlName="bracelet">
+                                    <option *ngFor="let bracelet of bracelets | async" value="{{bracelet.uid}}">{{bracelet.wifi}}</option>
+                                  </select>
+                                </div>
                               </div>
-                              <a href="" class="btn btn-primary btn-user btn-block">
+                              <a (click)="onSubmit()" class="btn btn-primary btn-user btn-block">
                                 Modifier
                               </a>
                             </form>
