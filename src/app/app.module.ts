@@ -19,7 +19,6 @@ import { AddEncadreurComponent } from './add-encadreur/add-encadreur.component';
 import { AddEnfantComponent } from './add-enfant/add-enfant.component';
 import { AddActiviteComponent } from './add-activite/add-activite.component';
 import { AddBraceletComponent } from './add-bracelet/add-bracelet.component';
-import { AddRapportComponent } from './add-rapport/add-rapport.component';
 import { EditBraceletComponent } from './edit-bracelet/edit-bracelet.component';
 import { EditActiviteComponent } from './edit-activite/edit-activite.component';
 import { EditEnfantComponent } from './edit-enfant/edit-enfant.component';
@@ -122,7 +121,6 @@ const routes: Routes = [
     AddEnfantComponent,
     AddActiviteComponent,
     AddBraceletComponent,
-    AddRapportComponent,
     EditBraceletComponent,
     EditActiviteComponent,
     EditEnfantComponent,

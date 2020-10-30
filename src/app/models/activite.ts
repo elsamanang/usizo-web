@@ -1,12 +1,13 @@
+import { Encadreur } from './encadreur';
 import { Enfant } from './enfant';
 
 export class Activite {
 
     uid: string;
     nom: string;
-    date: Date;
+    date: string;
     lieu: string;
-    encadreur: string;
+    encadreur: Encadreur;
     enfants: Enfant[];
 
 }
