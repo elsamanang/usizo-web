@@ -14,6 +14,7 @@ export class ActiviteComponent implements OnInit {
 
   ref: AngularFirestoreCollection<Activite>;
   activites: Observable<Activite[]>;
+  
 
   constructor(private serviceCrud: CrudService,
     private router: Router,
@@ -22,8 +23,13 @@ export class ActiviteComponent implements OnInit {
   ngOnInit() {
     this.activites = this.serviceCrud.colId$('activite');
   }
+
   delete(uid){
     this.afs.doc('activite/'+uid).delete();
+  }
+
+  details(uid) {
+    this.router.navigate(['/activite/' + uid]);
   }
 
 }

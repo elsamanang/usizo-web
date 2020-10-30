@@ -9,6 +9,9 @@
     #ajout{
         margin-left: 80%;
     }
+    i {
+      color: aliceblue;
+    }
 </style>
 <script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -66,13 +69,13 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <table>
-                                        <tr *ngFor="let enfant of activite.enfants">{{enfant.nom - enfant.prenom}}</tr>
+                                        <tr *ngFor="let enfant of activite.enfants">{{enfant.nom }} - {{enfant.prenom}}</tr>
                                     </table>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <a routerLink="/edit-activite" class="btn btn-primary btn-circle in">
+                            <a (click)="details(activite.uid)" class="btn btn-primary btn-circle in">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a (click)="delete(activite.uid)" class="btn btn-danger btn-circle in">
