@@ -22,8 +22,8 @@ export class AddActiviteComponent implements OnInit {
   activiteId: string;
   encadreurs: Observable<Encadreur[]>;
   enfants: Observable<Enfant[]>;
-  enfant: Enfant;
-  enfantActivite: Enfant[];
+  activite: Activite;
+  enfantActivite: Enfant;
 
   
   constructor(private router: Router, 
@@ -33,15 +33,14 @@ export class AddActiviteComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.enfantActivite = [];
     this.activiteId = "0";
     this.uid = uid(32);
     this.encadreurs = this.serviceCrud.colId$('encadreur');
     this.enfants = this.serviceCrud.colId$('enfant');
-
+    
     this.miniForm = this.formBuilder.group({
       id: ['', [Validators.required]]
-    })
+    });
   }
 
   initForm() {
@@ -70,6 +69,7 @@ export class AddActiviteComponent implements OnInit {
       data.encadreur = enc;
       this.afs.doc('activite/'+data.uid).set(data).then((result) => {
         this.activiteId = data.uid;
+        this.activite = data;
       }).catch((error) => {
         window.alert("echec d'ajout");
       })
@@ -78,15 +78,28 @@ export class AddActiviteComponent implements OnInit {
 
   ajoutEnfant() {
     const enfantId = this.miniForm.get('id').value;
-    this.serviceCrud.doc$<Activite>("activite/"+this.uid).subscribe(active => {
-      this.serviceCrud.doc$<Enfant>("enfant/"+enfantId).subscribe(enfant => {
-        this.enfant = enfant;
-        active.enfants.push(this.enfant);
-        console.log(active.enfants)
-      })
-      this.afs.doc('activite/'+this.uid).set(active);
-    })
+    this.serviceCrud.doc$<Enfant>("enfant/"+enfantId).subscribe(enfant => {
+      this.enfantActivite = {
+        uid: enfant.uid,
+        nom: enfant.nom,
+        postnom: enfant.postnom,
+        prenom: enfant.prenom,
+        pere: enfant.pere,
+        mere: enfant.mere,
+        naissance: enfant.naissance,
+        photo: enfant.photo,
+        bracelet: enfant.bracelet
 
+      }
+      this.activite.enfants.push(this.enfantActivite);
+      this.afs.doc('activite/'+this.activite.uid).set(this.activite)
+      return true;
+    })
+    
+  }
+
+  retour() {
+    this.router.navigate(['/activites']);
   }
 
 
