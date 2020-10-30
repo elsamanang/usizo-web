@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Encadreur } from '../models/encadreur';
@@ -16,15 +16,19 @@ export class EncadreurComponent implements OnInit {
   encadreurs: Observable<Encadreur[]>;
 
   constructor(private serviceCrud: CrudService,
-    private router: Router) { }
+    private router: Router,
+    private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.encadreurs = this.serviceCrud.colId$('encadreur');
   }
 
-  details(uid: string) {
-    this.router.navigate(['//' + uid]);
+  delete(uid){
+    this.afs.doc('encadreur/'+uid).delete();
+  }
 
+  details(uid) {
+    this.router.navigate(['/encadreur/' + uid]);
   }
 
 }

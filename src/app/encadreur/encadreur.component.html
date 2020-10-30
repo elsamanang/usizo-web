@@ -9,6 +9,9 @@
     #ajout{
         margin-left: 80%;
     }
+    i {
+      color: aliceblue;
+    }
 </style>
 <script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -61,12 +64,12 @@
                         <td>{{encadreur.phone}}</td>
                         <td>{{encadreur.naissance}}</td>
                         <td>
-                            <a routerLink="/edit-encadreur" class="btn btn-primary btn-circle in">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-circle in">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                          <a (click)="details(encadreur.uid)" class="btn btn-primary btn-circle in">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                          <a (click)="delete(encadreur.uid)" class="btn btn-danger btn-circle in">
+                              <i class="fas fa-trash"></i>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
