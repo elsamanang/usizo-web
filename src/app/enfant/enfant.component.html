@@ -9,6 +9,9 @@
     #ajout{
         margin-left: 80%;
     }
+    i {
+      color: aliceblue;
+    }
 </style>
 <script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -41,6 +44,7 @@
                         <th>Naissance</th>
                         <th>Pere</th>
                         <th>Mere</th>
+                        <th>Bracelet</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -52,24 +56,26 @@
                         <th>Naissance</th>
                         <th>Pere</th>
                         <th>Mere</th>
+                        <th>Bracelet</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
                       <tr *ngFor="let enfant of enfants | async">
                         <td>{{enfant.nom}}</td>
-                        <td>Nixon</td>
-                        <td>jean</td>
-                        <td>2011/04/25</td>
-                        <td>jean-jack nixon</td>
-                        <td>anne-marie tiger</td>
+                        <td>{{enfant.postnom}}</td>
+                        <td>{{enfant.prenom}}</td>
+                        <td>{{enfant.naissance}}</td>
+                        <td>{{enfant.pere}}</td>
+                        <td>{{enfant.mere}}</td>
+                        <td>{{enfant.bracelet.phone}}</td>
                         <td>
-                            <a routerLink="/edit-enfant" class="btn btn-primary btn-circle in">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-circle in">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                          <a (click)="details(enfant.uid)" class="btn btn-primary btn-circle in">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                          <a (click)="delete(enfant.uid)" class="btn btn-danger btn-circle in">
+                              <i class="fas fa-trash"></i>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
