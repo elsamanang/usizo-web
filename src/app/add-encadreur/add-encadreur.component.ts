@@ -4,10 +4,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CrudService } from '../services/crud.service';
 import { finalize} from 'rxjs/operators';
 import { Encadreur } from '../models/encadreur';
-import { mainModule } from 'process';
+import uid from 'uid';
 
 @Component({
   selector: 'app-add-encadreur',
@@ -20,7 +19,6 @@ export class AddEncadreurComponent implements OnInit {
   uid: string
   refImage: any;
   downloadURL: Observable<string>;
-  id = require('angular-uid');
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
@@ -29,8 +27,7 @@ export class AddEncadreurComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.uid = this.id(32);
-    alert(this.uid);
+    this.uid = uid(32);
 
   }
 
@@ -53,7 +50,7 @@ export class AddEncadreurComponent implements OnInit {
     const date = this.encadreurForm.get('date').value;
     const adresse = this.encadreurForm.get('adresse').value;
     const phone = this.encadreurForm.get('phone').value;
-    const password = this.id(8);
+    const password = uid(8);
     const role = this.encadreurForm.get('role').value;
 
     const data: Encadreur = {
