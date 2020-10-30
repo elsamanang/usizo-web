@@ -1,3 +1,8 @@
+<style>
+  select {
+    color: 0;
+  }
+</style>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -22,41 +27,40 @@
                           <div class="text-center">
                             <h1 class="h5 text-gray-900 mb-4">remplir le formulaire !</h1>
                           </div>
-                          <form class="user">
+                          <form class="user" [formGroup]="activiteForm">
                             <div class="form-group row">
                               <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Name">
+                                <input type="text" formControlName="nom" class="form-control form-control-user" id="exampleFirstName" placeholder="Name">
                               </div>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Lieu">
+                                <input type="text" formControlName="lieu" class="form-control form-control-user" id="exampleLastName" placeholder="Lieu">
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-6 mb-3 mb-sm-0">
-                                  <select class="form-control form-control-user" id="exampleInputEmail" placeholder="choisir encadreur">
-                                    <option class="form-control form-control-user">murasa kibara</option>
-                                    <option class="form-control form-control-user">ryota kise</option>
+                                  <select formControlName="encadreur" class="form-control form-control-user" id="exampleInputEmail" placeholder="choisir encadreur">
+                                    <option class="form-control form-control-user" *ngFor="let encadreur of encadreurs | async" value="{{encadreur.uid}}">{{encadreur.nom}}</option>
                                   </select>
                               </div>
                               <div class="col-sm-6 mb-3 mb-sm-0">
-                                  <input type="date" class="form-control form-control-user" placeholder="01/01/1900">
+                                  <input type="date" formControlName="date" class="form-control form-control-user" placeholder="01/01/1900">
                               </div>
                             </div>
-                            <a href="" class="btn btn-primary btn-user btn-block">
+                            <a (click)="onSubmit()" class="btn btn-primary btn-user btn-block">
                               Ajouter
                             </a>
                           </form>
                           <br><hr><br>
                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#staticBackdrop">
+                            <button *ngIf="activiteId != '0'" type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#staticBackdrop">
                                 Ajouter enfant
                             </button>
                             <br>
-                            <div>
+                            <!--<div>
                                 <ul>
-                                    <li>kibara</li>
+                                    <li *ngFor="let enfant of enfantActivite | async">{{enfant.nom - enfant.postnom - enfant.prenom}}</li>
                                 </ul>
-                            </div>
+                            </div>-->
                         </div>
                       </div>
                     </div>
@@ -70,16 +74,17 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
-                            <div class="modal-body">
-                                <select class="form-control form-control-user" id="exampleInputEmail" placeholder="choisir enfant">
-                                    <option class="form-control form-control-user">murasa kibara</option>
-                                    <option class="form-control form-control-user">ryota kise</option>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">valider</button>
-                            </div>
+                            <form [formGroup]="miniForm">
+                              <div class="modal-body">
+                                  <select class="form-control form-control-user" id="exampleInputEmail" placeholder="choisir enfant" formControlName="id">
+                                    <option class="form-control form-control-user" *ngFor="let enfant of enfants | async" value="{{enfant.uid}}">{{enfant.nom}}</option>
+                                  </select>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" (click)="ajoutEnfant()">valider</button>
+                              </div>
+                            </form>
                         </div>
                         </div>
                     </div>
