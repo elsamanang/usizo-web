@@ -30,6 +30,7 @@ import { AngularFireStorageModule} from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthentificationService } from './services/authentification.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 const routes: Routes = [
   {
@@ -134,7 +135,8 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule, 
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
   providers: [AuthentificationService],
   bootstrap: [AppComponent]
