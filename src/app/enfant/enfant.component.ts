@@ -20,11 +20,11 @@ export class EnfantComponent implements OnInit {
     private afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.enfants = this.serviceCrud.colId$('enfant');
+    this.enfants = this.serviceCrud.getAll('enfant');
   }
 
   delete(uid){
-    this.afs.doc('enfant/'+uid).delete();
+    this.serviceCrud.delete(uid,'enfant');
   }
 
   details(uid) {
