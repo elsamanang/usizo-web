@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,16 +24,15 @@ export class EditEnfantComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore,
     private serviceCrud: CrudService,
     private storage : AngularFireStorage,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initForm();
-    this.bracelets = this.serviceCrud.colId$('bracelet');
+    this.bracelets = this.serviceCrud.getAll('bracelet');
     this.uid = this.route.snapshot.paramMap.get('id');
-    this.enfant = this.serviceCrud.doc$<Enfant>('enfant/'+this.uid);
+    this.enfant = this.serviceCrud.One<Enfant>('enfant/', this.uid);
   }
 
   initForm() {
@@ -70,9 +68,9 @@ export class EditEnfantComponent implements OnInit {
       
     }
 
-    this.serviceCrud.doc$<Bracelet>("bracelet/"+bracelet).subscribe(enc =>{
+    this.serviceCrud.One<Bracelet>("bracelet/", bracelet).subscribe(enc =>{
       data.bracelet = enc;
-      this.afs.doc('enfant/'+data.uid).set(data).then((result) => {
+      this.serviceCrud.create('enfant', data, data.uid).then((result) => {
         this.router.navigate(['/enfants']);
       }).catch((error) => {
         window.alert("echec d'ajout");
