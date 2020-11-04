@@ -20,11 +20,11 @@ export class BraceletComponent implements OnInit {
     private afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.bracelets = this.serviceCrud.colId$('bracelet');
+    this.bracelets = this.serviceCrud.getAll('bracelet');
   }
 
   delete(uid){
-    this.afs.doc('bracelet/'+uid).delete();
+    this.serviceCrud.delete(uid,'bracelet');
   }
 
   details(uid) {
