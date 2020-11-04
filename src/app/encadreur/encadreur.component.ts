@@ -16,15 +16,18 @@ export class EncadreurComponent implements OnInit {
   encadreurs: Observable<Encadreur[]>;
 
   constructor(private serviceCrud: CrudService,
-    private router: Router,
-    private afs: AngularFirestore) { }
+    private router: Router) { }
 
   ngOnInit() {
-    this.encadreurs = this.serviceCrud.colId$('encadreur');
+    this.encadreurs = this.serviceCrud.getAll('encadreur');
   }
 
   delete(uid){
-    this.afs.doc('encadreur/'+uid).delete();
+    this.serviceCrud.delete(uid, 'encadreur').then((result) => {
+      window.alert("suppression reussit ! ");
+    }).catch((error) => {
+      window.alert("echec suppression !");
+    });
   }
 
   details(uid) {
