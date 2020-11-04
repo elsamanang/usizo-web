@@ -16,7 +16,6 @@ import { CrudService } from '../services/crud.service';
 export class EditActiviteComponent implements OnInit {
 
   activiteId: string;
-  ref: AngularFirestoreCollection<Activite>;
   activite: Observable<Activite>;
   enfants: Enfant[] = [];
   enfantActivite: Enfant;
@@ -29,21 +28,20 @@ export class EditActiviteComponent implements OnInit {
   constructor(private serviceCrud: CrudService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private afs: AngularFirestore) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.activiteId = this.route.snapshot.paramMap.get('id');
-    this.activite = this.serviceCrud.doc$<Activite>('activite/'+this.activiteId);
-    this.enfantsListe = this.serviceCrud.colId$('enfant');
-    this.serviceCrud.doc$<Activite>('activite/'+this.activiteId).subscribe(activite =>{
+    this.activite =this.serviceCrud.One<Activite>('activite/',this.activiteId);
+    this.enfantsListe = this.serviceCrud.getAll('enfant');
+    this.serviceCrud.One<Activite>('activite/',this.activiteId).subscribe(activite =>{
       this.enfants = activite.enfants;
       this.acti = activite;
     });
     this.miniForm = this.formBuilder.group({
       id: ['', [Validators.required]]
     });
-    this.encadreurs = this.serviceCrud.colId$('encadreur');
+    this.encadreurs = this.serviceCrud.getAll('encadreur');
     this.initForm();
    
   }
@@ -68,12 +66,14 @@ export class EditActiviteComponent implements OnInit {
       date: date,
       lieu: lieu,
       encadreur: null,
-      enfants: this.acti.enfants
+      enfants: []
     }
-    console.log(data)
-    this.serviceCrud.doc$<Encadreur>("encadreur/"+encadreur).subscribe(enc =>{
+    this.serviceCrud.One<Encadreur>("encadreur/", encadreur).subscribe(enc =>{
       data.encadreur = enc;
-      this.afs.doc('activite/'+data.uid).set(data).then((result) => {
+      this.serviceCrud.One<Activite>("activite/", this.activiteId).subscribe(acti => {
+        data.enfants = acti.enfants;
+      });
+      this.serviceCrud.create('activite', data, data.uid).then((result) => {
         window.alert("modification");
       }).catch((error) => {
         window.alert("echec de modification");
@@ -83,7 +83,7 @@ export class EditActiviteComponent implements OnInit {
 
   ajoutEnfant() {
     const enfantId = this.miniForm.get('id').value;
-    this.serviceCrud.doc$<Enfant>("enfant/"+enfantId).subscribe(enfant => {
+    this.serviceCrud.One<Enfant>("enfant/", enfantId).subscribe(enfant => {
       this.enfantActivite = {
         uid: enfant.uid,
         nom: enfant.nom,
@@ -97,7 +97,7 @@ export class EditActiviteComponent implements OnInit {
 
       }
       this.acti.enfants.push(this.enfantActivite);
-      this.afs.doc('activite/'+this.acti.uid).set(this.activite)
+      this.serviceCrud.create('activite', this.acti, this.acti.uid)
       return true;
     })
     
