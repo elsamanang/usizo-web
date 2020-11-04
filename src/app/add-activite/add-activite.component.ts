@@ -35,8 +35,8 @@ export class AddActiviteComponent implements OnInit {
     this.initForm();
     this.activiteId = "0";
     this.uid = uid(32);
-    this.encadreurs = this.serviceCrud.colId$('encadreur');
-    this.enfants = this.serviceCrud.colId$('enfant');
+    this.encadreurs = this.serviceCrud.getAll('encadreur');
+    this.enfants = this.serviceCrud.getAll('enfant');
     
     this.miniForm = this.formBuilder.group({
       id: ['', [Validators.required]]
@@ -65,9 +65,9 @@ export class AddActiviteComponent implements OnInit {
       encadreur: null,
       enfants: []
     }
-    this.serviceCrud.doc$<Encadreur>("encadreur/"+encadreur).subscribe(enc =>{
+    this.serviceCrud.One<Encadreur>("encadreur/",encadreur).subscribe(enc =>{
       data.encadreur = enc;
-      this.afs.doc('activite/'+data.uid).set(data).then((result) => {
+      this.serviceCrud.create('activite/', data, data.uid).then((result) => {
         this.activiteId = data.uid;
         this.activite = data;
       }).catch((error) => {
@@ -78,7 +78,7 @@ export class AddActiviteComponent implements OnInit {
 
   ajoutEnfant() {
     const enfantId = this.miniForm.get('id').value;
-    this.serviceCrud.doc$<Enfant>("enfant/"+enfantId).subscribe(enfant => {
+    this.serviceCrud.One<Enfant>("enfant/", enfantId).subscribe(enfant => {
       this.enfantActivite = {
         uid: enfant.uid,
         nom: enfant.nom,
@@ -92,7 +92,7 @@ export class AddActiviteComponent implements OnInit {
 
       }
       this.activite.enfants.push(this.enfantActivite);
-      this.afs.doc('activite/'+this.activite.uid).set(this.activite)
+      this.serviceCrud.create('activite/', this.activite,this.activite.uid)
       return true;
     })
     
