@@ -46,9 +46,9 @@
                       </tr>
                     </tfoot>
                     <tbody>
-                      <tr>
-                        <td>bracelet1</td>
-                        <td>Lavage des mains</td>
+                      <tr *ngFor="let alert of alerts | async">
+                        <td>{{alert.bracelet.phone}}</td>
+                        <td>{{alert.message}}</td>
                         <td>
                             <a href="#" class="btn btn-danger btn-circle in">
                                 <i class="fas fa-archive"></i>
@@ -81,8 +81,8 @@
                      </tfoot>
                      <tbody>
                        <tr *ngFor="let alert of alerts | async">
-                         <td>{{alert.bluetooth}}</td>
-                         <td>{{alert.wifi}}</td>
+                         <td>{{alert.bracelet.wifi}}</td>
+                         <td>{{alert.alert.message}}</td>
                        </tr>
                      </tbody>
                    </table>
