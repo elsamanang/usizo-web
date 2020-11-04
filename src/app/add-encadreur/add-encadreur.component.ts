@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { finalize} from 'rxjs/operators';
 import { Encadreur } from '../models/encadreur';
 import uid from 'uid';
 import { AuthentificationService } from '../services/authentification.service';
+import { CrudService } from '../services/crud.service';
 
 @Component({
   selector: 'app-add-encadreur',
@@ -23,7 +23,7 @@ export class AddEncadreurComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore,
+    private serviceCrud: CrudService,
     private storage : AngularFireStorage,
     private serviceauth: AuthentificationService) { }
 
@@ -68,12 +68,8 @@ export class AddEncadreurComponent implements OnInit {
       role: role
 
     }
-    this.afs.doc('encadreur/'+data.uid).set(data).then((result) => {
-      this.serviceauth.SignUp(data.mail, data.mdp).then((result) => {
-        this.router.navigate(['/encadreurs']);
-      }).catch((error) => {
-        window.alert("echec de creation du compte");
-      });
+    this.serviceCrud.create('encadreur', data, data.uid).then((result) => {
+      this.router.navigate(['/encadreurs']);
     }).catch((error) => {
       window.alert("echec d'ajout");
     });
