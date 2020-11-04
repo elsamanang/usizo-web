@@ -3,6 +3,7 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Alert } from '../models/alert';
+import { Bracelet } from '../models/bracelet';
 import { CrudService } from '../services/crud.service';
 
 @Component({
@@ -13,13 +14,33 @@ import { CrudService } from '../services/crud.service';
 export class AlertComponent implements OnInit {
 
   ref: AngularFirestoreCollection<Alert>;
-  alerts: Observable<Alert[]>;
+  alerts: ListAlert[];
 
   constructor(private serviceCrud: CrudService,
     private router: Router) { }
 
   ngOnInit() {
-    this.alerts = this.serviceCrud.colId$('alert');
+    this.serviceCrud.getAll('alert').subscribe(alerts => {
+      alerts.forEach((alert: any) => {
+        let data: ListAlert = {
+          alert: alert,
+          bracelet: null
+        }
+        this.serviceCrud.getAll('bracelet').subscribe(bracelets => {
+          bracelets.forEach((bracelet: any) => {
+            if(alert.numero == bracelet.phone) {
+              data.bracelet = bracelet;
+            }
+          })
+        })
+        this.alerts.push(data)
+      })
+    })
   }
 
+}
+
+export class ListAlert {
+  alert: Alert;
+  bracelet: Bracelet;
 }
