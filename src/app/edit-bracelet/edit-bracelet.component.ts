@@ -19,14 +19,13 @@ export class EditBraceletComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore,
     private route: ActivatedRoute,
     private serviceCrud: CrudService) { }
 
   ngOnInit() {
     this.initForm();
     this.uid = this.route.snapshot.paramMap.get('id');
-    this.bracelet = this.serviceCrud.doc$<Bracelet>('bracelet/'+this.uid);
+    this.bracelet = this.serviceCrud.One<Bracelet>('bracelet/',this.uid);
   }
 
   initForm() {
@@ -48,11 +47,11 @@ export class EditBraceletComponent implements OnInit {
       gps: '',
       phone: phone
     }
-    this.afs.doc('bracelet/'+data.uid).set(data).then((result) => {
+    this.serviceCrud.create('bracelet', data, data.uid).then((result) => {
       this.router.navigate(['/bracelets']);
     }).catch((error) => {
       window.alert("echec d'ajout");
-    })
+    });
   }
 
 }
