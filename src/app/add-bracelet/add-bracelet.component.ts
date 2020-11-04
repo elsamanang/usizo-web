@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import uid from 'uid';
 import { Bracelet } from '../models/bracelet';
+import { CrudService } from '../services/crud.service';
 
 @Component({
   selector: 'app-add-bracelet',
@@ -17,7 +17,7 @@ export class AddBraceletComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore) { }
+    private serviceCrud: CrudService) { }
 
   ngOnInit() {
     this.initForm();
@@ -43,11 +43,11 @@ export class AddBraceletComponent implements OnInit {
       gps: '',
       phone: phone
     }
-    this.afs.doc('bracelet/'+data.uid).set(data).then((result) => {
+    this.serviceCrud.create('bracelet', data, data.uid).then((result) => {
       this.router.navigate(['/bracelets']);
     }).catch((error) => {
       window.alert("echec d'ajout");
-    })
+    });
   }
 
 }
