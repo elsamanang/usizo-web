@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Encadreur } from '../models/encadreur';
 import { CrudService } from '../services/crud.service';
@@ -20,22 +19,19 @@ export class EditEncadreurComponent implements OnInit {
   refImage: any;
   downloadURL: Observable<string>;
   encadreur: Observable<Encadreur>;
-  ref: Encadreur;
+  enc: Observable<Encadreur>
+  ref: string;
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore,
     private route: ActivatedRoute,
     private serviceCrud: CrudService,
     private storage : AngularFireStorage) { }
 
   ngOnInit() {
     this.uid = this.route.snapshot.paramMap.get('id');
-    this.encadreur = this.serviceCrud.doc$<Encadreur>('encadreur/'+this.uid);
+    this.encadreur = this.serviceCrud.One<Encadreur>('encadreur/',this.uid)
     this.initForm();
-    this.serviceCrud.doc$<Encadreur>('encadreur/'+this.uid).subscribe(encadreur => {
-      this.ref = encadreur;
-    })
   }
 
   initForm() {
@@ -68,15 +64,18 @@ export class EditEncadreurComponent implements OnInit {
       naissance: date,
       adresse: adresse,
       photo: this.refImage,
-      mdp: this.ref.mdp,
+      mdp: '',
       role: role
 
     }
-    this.afs.doc('encadreur/'+data.uid).set(data).then((result) => {
-      this.router.navigate(['/encadreurs']);
-    }).catch((error) => {
-      window.alert("echec d'ajout");
-    });
+    this.serviceCrud.One<Encadreur>('encadreur/', this.uid).subscribe(encadreur => {
+      data.mdp = encadreur.mdp;
+      this.serviceCrud.create('encadreur', data, data.uid).then((result) => {
+        this.router.navigate(['/encadreurs']);
+      }).catch((error) => {
+        window.alert("echec d'ajout");
+      });
+    })
   }
 
   uploadFile(event) {
