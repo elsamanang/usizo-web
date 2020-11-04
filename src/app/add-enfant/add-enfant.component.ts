@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,12 +24,11 @@ export class AddEnfantComponent implements OnInit {
 
   constructor(private router: Router, 
     private formBuilder: FormBuilder,
-    private afs: AngularFirestore,
     private serviceCrud: CrudService,
     private storage : AngularFireStorage) { }
 
   ngOnInit() {
-    this.bracelets = this.serviceCrud.colId$('bracelet');
+    this.bracelets = this.serviceCrud.getAll('bracelet');
     this.initForm();
     this.uid = uid(32);
   }
@@ -68,9 +66,9 @@ export class AddEnfantComponent implements OnInit {
       
     }
 
-    this.serviceCrud.doc$<Bracelet>("bracelet/"+bracelet).subscribe(enc =>{
+    this.serviceCrud.One<Bracelet>("bracelet/", bracelet).subscribe(enc =>{
       data.bracelet = enc;
-      this.afs.doc('enfant/'+data.uid).set(data).then((result) => {
+      this.serviceCrud.create('enfant', data, data.uid).then((result) => {
         this.router.navigate(['/enfants']);
       }).catch((error) => {
         window.alert("echec d'ajout");
