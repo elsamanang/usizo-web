@@ -18,16 +18,16 @@ export class HomeComponent implements OnInit {
     private serviceCrud: CrudService) { }
 
   ngOnInit() {
-    this.serviceCrud.colId$('bracelet').subscribe(bracelet => {
+    this.serviceCrud.getAll('bracelet').subscribe(bracelet => {
       this.bracelets = bracelet.length
     });
-    this.serviceCrud.colId$('encadreur').subscribe(encadreur => {
+    this.serviceCrud.getAll('encadreur').subscribe(encadreur => {
       this.encadreurs = encadreur.length
     });
-    this.serviceCrud.colId$('enfant').subscribe(enfant => {
+    this.serviceCrud.getAll('enfant').subscribe(enfant => {
       this.enfants = enfant.length
     });
-    this.serviceCrud.colId$('alert').subscribe(alert => {
+    this.serviceCrud.getAll('alert').subscribe(alert => {
       this.alerts = alert.length
     })
 
