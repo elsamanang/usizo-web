@@ -5,4 +5,5 @@ export class Bracelet {
     wifi: string;
     gps: string;
     phone: string;
+    presence: number;
 }

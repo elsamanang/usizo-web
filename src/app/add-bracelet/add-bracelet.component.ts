@@ -41,7 +41,8 @@ export class AddBraceletComponent implements OnInit {
       bluetooth: bluetooth,
       wifi: wifi,
       gps: '',
-      phone: phone
+      phone: phone,
+      presence: 0
     }
     this.serviceCrud.create('bracelet', data, data.uid).then((result) => {
       this.router.navigate(['/bracelets']);
