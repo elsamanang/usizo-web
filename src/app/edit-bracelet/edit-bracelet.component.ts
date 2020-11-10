@@ -51,7 +51,7 @@ export class EditBraceletComponent implements OnInit {
     this.serviceCrud.create('bracelet', data, data.uid).then((result) => {
       this.router.navigate(['/bracelets']);
     }).catch((error) => {
-      window.alert("echec d'ajout");
+      window.alert("echec d'ajout !");
     });
   }
 
