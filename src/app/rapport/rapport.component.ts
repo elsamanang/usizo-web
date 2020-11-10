@@ -19,7 +19,7 @@ export class RapportComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.rapports = this.serviceCrud.colId$('rapport');
+    this.rapports = this.serviceCrud.getAll('rapport');
   }
 
 }

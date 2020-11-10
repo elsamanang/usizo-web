@@ -83,23 +83,17 @@ export class EditActiviteComponent implements OnInit {
 
   ajoutEnfant() {
     const enfantId = this.miniForm.get('id').value;
-    this.serviceCrud.One<Enfant>("enfant/", enfantId).subscribe(enfant => {
-      this.enfantActivite = {
-        uid: enfant.uid,
-        nom: enfant.nom,
-        postnom: enfant.postnom,
-        prenom: enfant.prenom,
-        pere: enfant.pere,
-        mere: enfant.mere,
-        naissance: enfant.naissance,
-        photo: enfant.photo,
-        bracelet: enfant.bracelet
-
-      }
-      this.acti.enfants.push(this.enfantActivite);
-      this.serviceCrud.create('activite', this.acti, this.acti.uid)
+    this.serviceCrud.One<Activite>("activite/", this.activiteId).subscribe(activite => {
+      this.serviceCrud.One<Enfant>("enfant/", enfantId).subscribe(enfant => {
+        this.enfantActivite = enfant;
+        activite.enfants.push(this.enfantActivite);
+        return true;
+      })
+      console.log(activite);
+      this.serviceCrud.create('activite', activite, activite.uid);
       return true;
     })
+    
     
   }
 

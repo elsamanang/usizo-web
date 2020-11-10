@@ -46,7 +46,7 @@ export class EditBraceletComponent implements OnInit {
       wifi: wifi,
       gps: '',
       phone: phone,
-      presence: 0
+      presence: false
     }
     this.serviceCrud.create('bracelet', data, data.uid).then((result) => {
       this.router.navigate(['/bracelets']);
