@@ -69,7 +69,11 @@ export class AddEncadreurComponent implements OnInit {
 
     }
     this.serviceCrud.create('encadreur', data, data.uid).then((result) => {
-      this.router.navigate(['/encadreurs']);
+      this.serviceauth.SignUp(data.mail, data.mdp).then((result) => {
+        this.router.navigate(['/encadreurs']);
+      }).catch((error) => {
+        window.alert("echec de creation du compte");
+      });
     }).catch((error) => {
       window.alert("echec d'ajout");
     });

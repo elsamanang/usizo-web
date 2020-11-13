@@ -38,7 +38,6 @@ export class EditEncadreurComponent implements OnInit {
     this.encadreurForm = this.formBuilder.group({
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
       date: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -49,7 +48,6 @@ export class EditEncadreurComponent implements OnInit {
   onSubmit() {
     const nom = this.encadreurForm.get('nom').value;
     const prenom = this.encadreurForm.get('prenom').value;
-    const email = this.encadreurForm.get('email').value;
     const date = this.encadreurForm.get('date').value;
     const adresse = this.encadreurForm.get('adresse').value;
     const phone = this.encadreurForm.get('phone').value;
@@ -59,7 +57,7 @@ export class EditEncadreurComponent implements OnInit {
       uid: this.uid,
       nom: nom,
       prenom: prenom,
-      mail: email,
+      mail: '',
       phone: phone,
       naissance: date,
       adresse: adresse,
@@ -70,6 +68,7 @@ export class EditEncadreurComponent implements OnInit {
     }
     this.serviceCrud.One<Encadreur>('encadreur/', this.uid).subscribe(encadreur => {
       data.mdp = encadreur.mdp;
+      data.mail = encadreur.mail;
       this.serviceCrud.create('encadreur', data, data.uid).then((result) => {
         this.router.navigate(['/encadreurs']);
       }).catch((error) => {
